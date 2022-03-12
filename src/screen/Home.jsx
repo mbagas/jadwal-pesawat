@@ -2,16 +2,18 @@ import React, { useRef, useState } from 'react';
 import { SafeAreaView, TextInput, View, Text, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { JADWAL, MASKAPAI, BANDARA } from '../utils/data'; 
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 
 const Home = ({navigation}) => {
     const [departure, setDeparture] = useState('');
     const [arrival, setArrival] = useState('');
+    const [date, setDate] = useState('');
 
     const departureRef = useRef('');
     const arrivalRef = useRef('');
 
     const onSubmit = () => {
-
+        console.log(date);
         let newDeparture;
         for(const [key, value] of Object.entries(BANDARA)){
             if(value.bandara_nama === departure){
@@ -19,6 +21,7 @@ const Home = ({navigation}) => {
                 break;
             }
         }
+
         let newArrival;
         for(const [key, value] of Object.entries(BANDARA)){
             if(value.bandara_nama === arrival){
@@ -31,7 +34,7 @@ const Home = ({navigation}) => {
         navigation.navigate('Detail', {
             departure: newDeparture,
             arrival: newArrival,
-            // date,
+            date: date,
         });
     }
 
@@ -49,6 +52,10 @@ const Home = ({navigation}) => {
                                 placeholder="Lokasi Keberangkatan"
                                 label="Lokasi Keberangkatan"
                                 autoCompleteType={undefined}
+                                leftIcon={<FontAwesome name="plane-departure" size={20} color='#88b454' />}
+                                leftIconContainerStyle={{
+                                    padding: 10,
+                                }}
                             />
                         </View>
                         <View style={styles.fieldContainer}>
@@ -59,15 +66,37 @@ const Home = ({navigation}) => {
                                 placeholder="Lokasi Tujuan"
                                 label="Lokasi Tujuan"
                                 autoCompleteType={undefined}
+                                leftIcon={<FontAwesome name="plane-arrival" size={20} color='#88b454' />}
+                                leftIconContainerStyle={{
+                                    padding: 10,
+                                }}
                             />
                         </View>
-                        <View style={styles.container}>
-                            <Button title="Cari" style={styles.button} onPress={onSubmit} />
+                        <View style={styles.fieldContainer}>
+                            <Input
+                                type="text"
+                                value={date}
+                                onChangeText={setDate}
+                                autoCompleteType={undefined}
+                                placeholder="Masukan Tanggal Keberangkatan"
+                                label="Tanggal Keberangkatan"
+                                leftIcon={<FontAwesome name="calendar-alt" size={20} color='#88b454' />}
+                                leftIconContainerStyle={{
+                                    padding: 10,
+                                }}
+                            />
                         </View>
+                        <View style={styles.fieldContainer}>
+                            <Button title="Cari" style={styles.button} onPress={onSubmit}/>
+                        </View>
+                        
                     </View>
                 </View>
+                
             </KeyboardAvoidingView>
-           
+            <View style={styles.copyright}>
+                    <Text>Copyright Muksin Bagaskara - 119140167</Text>
+                </View>
         </SafeAreaView>
     );
 };
@@ -75,20 +104,28 @@ const Home = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#88b454',
-
+        // height: '80%',
     },
     formContainer: {
         backgroundColor: 'white',
         margin: 20,
         padding: 10,
+        paddingTop: 30,
         borderRadius: 15,
+        height: '100%',
     },
     fieldContainer: {
         marginHorizontal: 10,
+        marginVertical: 10,
         paddingTop: 2,
     },
     button: {
-
+        backgroundColor: 'orange',
+        borderRadius: 15,
+    },
+    copyright: {
+        marginTop: 100,
+        alignItems: 'center',
     }
 })
 
