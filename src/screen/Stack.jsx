@@ -2,6 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Detail from './Detail';
 import Home from './Home';
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,11 +24,17 @@ const ScreenStack = () => {
                 component={Home}
                 options={{
                     title: "HEALLING.ID",
+                    headerLeft: () => <FontAwesome name="bars" size={24} color="white" />,
+                    headerRight: () => <FontAwesome name="user-alt" size={24} color="white" />,
                 }}
             />
             <Stack.Screen
                 name="Detail"
                 component={Detail}
+                options={{
+                    title: "HEALLING.ID",
+                    headerRight: () => <FontAwesome name="user-alt" size={24} color="white" />,
+                }}
             />  
 
         </Stack.Navigator>

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { SafeAreaView, TextInput, View, Text, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { SafeAreaView, TextInput, View, Text, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { JADWAL, MASKAPAI, BANDARA } from '../utils/data'; 
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
@@ -13,24 +13,28 @@ const Home = ({navigation}) => {
     const arrivalRef = useRef('');
 
     const onSubmit = () => {
-        console.log(date);
+
         let newDeparture;
+        // let lowDeparture = departure.toLowerCase();
+        console.log(departure);
         for(const [key, value] of Object.entries(BANDARA)){
             if(value.bandara_nama === departure){
                 newDeparture = (key);
                 break;
             }
+            
         }
 
         let newArrival;
         for(const [key, value] of Object.entries(BANDARA)){
-            if(value.bandara_nama === arrival){
+            if(value.bandara_nama=== arrival){
                 newArrival = (key);
                 break;
             }
+            
         }
+
         
-        console.log(newDeparture);
         navigation.navigate('Detail', {
             departure: newDeparture,
             arrival: newArrival,
@@ -40,15 +44,16 @@ const Home = ({navigation}) => {
 
     return (
         <SafeAreaView style={{ flex:1}}>
-            <KeyboardAvoidingView style={styles.container}>
+            <KeyboardAvoidingView style={styles.screenContainer}>
                 <View style={styles.container}>
                     <View style={styles.formContainer}>
                         <View style={styles.fieldContainer}>
                             <Input 
                                 type="text"
-                                ref={arrivalRef}
+                                // ref={arrivalRef}
                                 value={departure}
-                                onChange={e => setDeparture(e.target.value)}
+                                // onChange={e => setDeparture(e.target.value)}
+                                onChangeText={setDeparture}
                                 placeholder="Lokasi Keberangkatan"
                                 label="Lokasi Keberangkatan"
                                 autoCompleteType={undefined}
@@ -60,9 +65,10 @@ const Home = ({navigation}) => {
                         </View>
                         <View style={styles.fieldContainer}>
                             <Input 
-                                ref={arrivalRef} 
+                                // ref={arrivalRef} 
                                 value={arrival}
-                                onChange={e => setArrival(e.target.value)}
+                                // onChange={e => setArrival(e.target.value)}
+                                onChangeText={setArrival}
                                 placeholder="Lokasi Tujuan"
                                 label="Lokasi Tujuan"
                                 autoCompleteType={undefined}
@@ -87,16 +93,22 @@ const Home = ({navigation}) => {
                             />
                         </View>
                         <View style={styles.fieldContainer}>
-                            <Button title="Cari" style={styles.button} onPress={onSubmit}/>
+                            {/* <Button title="Cari" style={styles.button} onPress={onSubmit}/> */}
+                            <TouchableOpacity 
+                                style={styles.button}
+                                onPress={onSubmit}
+                            >
+                                <Text style={styles.textButton}>Cari</Text>
+                            </TouchableOpacity>
                         </View>
                         
                     </View>
+                    
                 </View>
-                
-            </KeyboardAvoidingView>
-            <View style={styles.copyright}>
+                <View style={styles.copyright}>
                     <Text>Copyright Muksin Bagaskara - 119140167</Text>
                 </View>
+            </KeyboardAvoidingView> 
         </SafeAreaView>
     );
 };
@@ -104,7 +116,12 @@ const Home = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#88b454',
-        // height: '80%',
+        // height: 300,
+        // marginBottom: 50,
+    },
+    screenContainer: {
+        justifyContent: 'space-between',
+        flex: 1,
     },
     formContainer: {
         backgroundColor: 'white',
@@ -112,7 +129,7 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingTop: 30,
         borderRadius: 15,
-        height: '100%',
+        // height: '150%',
     },
     fieldContainer: {
         marginHorizontal: 10,
@@ -121,7 +138,18 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: 'orange',
+        color: 'orange',
         borderRadius: 15,
+        height: 40,
+        alignItems: 'center',
+        padding: 10,
+    },
+    textButton: {
+        color: 'white',
+        textAlign: 'center',
+        alignItems: 'center',
+        fontWeight: 'bold',
+        fontSize: 15,
     },
     copyright: {
         marginTop: 100,
@@ -131,8 +159,3 @@ const styles = StyleSheet.create({
 
 export default Home;
 
-
-// const data = BANDARA.filter(el => Object.values(el)[0].bandara_nama === 'Soekarno Hatta');
-        
-
-// console.log(Object.keys(BANDARA));

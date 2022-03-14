@@ -10,6 +10,8 @@ const filtered_jadwal = (departure, arrival) => {
  }).map(function({id, bandara_kode_keberangkatan, bandara_kode_tujuan, maskapai_id}){
      return {id, bandara_kode_keberangkatan, bandara_kode_tujuan, maskapai_id};
  });
+
+ 
   return data;
 }
 
@@ -36,10 +38,24 @@ const Item = ({ departure, arrival, maskapai_id, date }) => (
 
 const Detail = ({navigation, route}) => {
   const {departure, arrival, date} = route.params;
-
+  if(!departure || !arrival){
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.item}>
+          <View style={styles.row}>
+              <Text style={styles.unvail}>Tidak ada jadwal penerbangan</Text>
+    
+              
+          </View>
+        </View>
+      </SafeAreaView>
+    )
+  }
   const renderItem = ({ item }) => (
     <Item departure={item.bandara_kode_keberangkatan} arrival={item.bandara_kode_tujuan} maskapai_id={item.maskapai_id} date={date}/>
   );
+
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -62,9 +78,8 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    // marginTop: StatusBar.currentHeight || 0,
     backgroundColor: '#D1D1D1',
-    posiion: 'relative',
   },
   item: {
     backgroundColor: '#fff',
@@ -72,6 +87,8 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
     borderRadius: 15,
+    shadowColor: '#000',
+    elevation: 5,
   },
   row: {
     flexDirection: 'row',
@@ -93,6 +110,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     width: '100%',
     backgroundColor: '#88b454',
+    // marginTop:-30,
   },
   copyright: {
     alignItems: 'center',
@@ -100,10 +118,13 @@ const styles = StyleSheet.create({
   copyright: {
     marginBottom: 20,
     alignItems: 'center',
+  },
+  unvail: {
+    width:'100%',
+    alignItems: 'center',
+    textAlign: 'center',
   }
 });
 
 export default Detail;
 
-console.log(filtered_jadwal("SKH", "RDN"));
-console.log(BANDARA[JADWAL[0].bandara_kode_keberangkatan].bandara_nama);
