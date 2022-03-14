@@ -9,6 +9,9 @@ Kelas : RC
 deskripsi
 Aplikasi ini adalah aplikasi yang memberikan informasi terkait jadwal penerbangan dengan menentukan titik berangkat dan titik tujuan serta dengan tanggal berangkat.
 
+Laporan PDF : [RC-Muksin Bagaskara-119140167-Tugas 3.pdf](https://github.com/mbagas/jadwal-pesawat/files/8247033/RC-Muksin.Bagaskara-119140167-Tugas.3.pdf)
+
+
 ScreenShot aplikasi
 
 
