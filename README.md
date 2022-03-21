@@ -9,6 +9,12 @@ Kelas : RC
 deskripsi
 Aplikasi ini adalah aplikasi yang memberikan informasi terkait jadwal penerbangan dengan menentukan titik berangkat dan titik tujuan serta dengan tanggal berangkat.
 
+untuk build apk dengan menggunakan expo dapat menggunakan perinta
+
+expo build -t apk
+
+apk yang telah di build terdapat pada file bernama jadwal-pesawat.apk di repository
+
 Laporan PDF : [RC-Muksin Bagaskara-119140167-Tugas 3.pdf](https://github.com/mbagas/jadwal-pesawat/files/8247033/RC-Muksin.Bagaskara-119140167-Tugas.3.pdf)
 
 
