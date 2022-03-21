@@ -3,7 +3,6 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react
 import { JADWAL, MASKAPAI, BANDARA } from '../utils/data'; 
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 
-
 const filtered_jadwal = (departure, arrival) => {
   const data = JADWAL.filter(function(item){
     return item.bandara_kode_keberangkatan == departure && item.bandara_kode_tujuan == arrival;
@@ -15,14 +14,12 @@ const filtered_jadwal = (departure, arrival) => {
   return data;
 }
 
-
 const Item = ({ departure, arrival, maskapai_id, date }) => (
   <View style={styles.item}>
     <View style={styles.row}>
         <Text style={styles.col}>{BANDARA[departure].bandara_nama}</Text>
         <Text style={styles.col}> - </Text>
-        <Text style={styles.col}>{BANDARA[arrival].bandara_nama}</Text>
-        
+        <Text style={styles.col}>{BANDARA[arrival].bandara_nama}</Text> 
     </View>
     <View style={styles.row}>
     <FontAwesome name="plane" size={20} color='#88b454' style={{marginRight:5}}/>
@@ -35,7 +32,6 @@ const Item = ({ departure, arrival, maskapai_id, date }) => (
   
 );
 
-
 const Detail = ({navigation, route}) => {
   const {departure, arrival, date} = route.params;
   if(!departure || !arrival){
@@ -44,8 +40,6 @@ const Detail = ({navigation, route}) => {
         <View style={styles.item}>
           <View style={styles.row}>
               <Text style={styles.unvail}>Tidak ada jadwal penerbangan</Text>
-    
-              
           </View>
         </View>
       </SafeAreaView>
@@ -54,8 +48,6 @@ const Detail = ({navigation, route}) => {
   const renderItem = ({ item }) => (
     <Item departure={item.bandara_kode_keberangkatan} arrival={item.bandara_kode_tujuan} maskapai_id={item.maskapai_id} date={date}/>
   );
-
-  
 
   return (
     <SafeAreaView style={styles.container}>
